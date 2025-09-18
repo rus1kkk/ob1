@@ -26,7 +26,10 @@ const TestPage = () => {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    setQuestions(questionsData);
+    console.log("Loaded questions:", questionsData);
+    if (questionsData && questionsData.questions) {
+      setQuestions(questionsData.questions); // <-- используем .questions
+    }
 
     timerRef.current = setInterval(() => {
       setTime((prev) => prev + 1);
@@ -35,7 +38,7 @@ const TestPage = () => {
     return () => clearInterval(timerRef.current);
   }, []);
 
-  if (questions.length === 0) return null;
+  if (questions.length === 0 || !questions[currentQuestionIndex]) return null;
 
   const currentQuestion = questions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === questions.length - 1;

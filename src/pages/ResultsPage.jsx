@@ -12,6 +12,12 @@ import {
   AppBar,
   Toolbar,
   Box,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import logoWithText from "../assets/logoWithText.svg";
@@ -25,9 +31,12 @@ const ResultsPage = () => {
   const total = answers.length;
 
   const [leaders, setLeaders] = useState([]);
+  const [factOpen, setFactOpen] = useState(false);
+
+  const fact =
+    "Своё название кварц получил от немецкого слова (точнее, слова из одного из немецких диалектов), означающего «твёрдый».";
 
   useEffect(() => {
-    // имитация таблицы лидеров
     const demoLeaders = [
       { id: 1, name: "Иван Петров", score: 9, time: 35 },
       { id: 2, name: "Анна Смирнова", score: 8, time: 42 },
@@ -38,7 +47,6 @@ const ResultsPage = () => {
     setLeaders(demoLeaders);
   }, [score, time, userName]);
 
-  // Если нет answers, вернуться на главную
   useEffect(() => {
     if (!answers || answers.length === 0) {
       navigate("/");
@@ -124,6 +132,28 @@ const ResultsPage = () => {
             </TableBody>
           </Table>
         </TableContainer>
+
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setFactOpen(true)}
+          >
+            Показать интересный факт
+          </Button>
+        </Box>
+
+        <Dialog open={factOpen} onClose={() => setFactOpen(false)}>
+          <DialogTitle>Интересный факт о кварце</DialogTitle>
+          <DialogContent>
+            <DialogContentText>{fact}</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setFactOpen(false)} color="primary">
+              Закрыть
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     </Box>
   );

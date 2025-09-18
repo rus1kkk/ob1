@@ -28,7 +28,7 @@ const StartPage = () => {
           Объект внимания:
         </Typography>
         <Typography variant="h5" fontWeight="bold" gutterBottom>
-          Название объекта
+          МНОГОЛИКИЙ КВАРЦ
         </Typography>
         <Box sx={{ mt: 4 }}>
           <img
